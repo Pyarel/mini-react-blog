@@ -1,21 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
-/* base styles */
+/* base styles 
+#5C1F0F
+*/
 * {
   margin: 0;
   font-family: "Quicksand";
   color: #333;
+  background-color: rgb(248, 223, 227);
 }
 .navbar {
   padding: 20px;
   display: flex;
   align-items: center;
-  max-width: 600px;
+  max-width: 80%;
   margin: 0 auto;
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid #000000;
 }
 .navbar h1 {
-  color: #f1356d;
+  color: #5c1f0f;
 }
 .navbar .links {
   margin-left: auto;
@@ -24,43 +27,65 @@
   margin-left: 16px;
   text-decoration: none;
   padding: 6px;
+  font-weight: 600;
 }
 .navbar a:hover {
-  color: #f1356d;
+  color: #5c1f0f;
 }
 .content {
-  max-width: 600px;
+  max-width: 65%;
   margin: 40px auto;
   padding: 20px;
 }
 /* blog previews / list */
+.blog-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 50px;
+  grid-auto-rows: 400px;
+  grid-auto-columns: 1fr;
+  gap: 20px;
+}
+.blog-list h1 {
+  grid-column: 1/4;
+}
 .blog-preview {
   padding: 10px 16px;
-  margin: 20px 0;
-  border-bottom: 1px solid #fafafa;
+  border: 3px solid #644f4a;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 .blog-preview:hover {
-  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 3px 5px rgba(122, 32, 32, 0.1);
 }
 .blog-preview h2 {
   font-size: 20px;
-  color: #f1356d;
+  color: #5c1f0f;
   margin-bottom: 8px;
 }
 .blog-preview a {
   text-decoration: none;
 }
+.blog-body {
+  margin-top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 7; /* Limit to one line */
+  -webkit-box-orient: vertical;
+}
 /* blog details page */
 .blog-details h2 {
   font-size: 20px;
-  color: #f1356d;
+  color: #5c1f0f;
   margin-bottom: 10px;
 }
 .blog-details div {
   margin: 20px 0;
 }
 .blog-details button {
-  background: #f1356d;
+  background: #5c1f0f;
   color: #fff;
   border: 0;
   padding: 8px;
@@ -79,7 +104,7 @@
 }
 .create h2 {
   font-size: 20px;
-  color: #f1356d;
+  color: #5c1f0f;
   margin-bottom: 30px;
 }
 .create input,
@@ -88,12 +113,12 @@
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
-  border: 1px solid #ddd;
+  border: 1px solid #000;
   box-sizing: border-box;
   display: block;
 }
 .create button {
-  background: #f1356d;
+  background: #5c1f0f;
   color: #fff;
   border: 0;
   padding: 8px;

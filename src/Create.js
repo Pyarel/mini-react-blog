@@ -1,27 +1,48 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [author, setAuthor] = useState("");
+  const [author, setAuthor] = useState("mario");
+  const [image, setImage] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const history = useHistory();
 
+  const uploadPicture = (e) => {
+    const file = e.target.files && e.target.files[0];
+
+    //Create a file reader object
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImage(reader.result);
+    };
+  };
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const blog = { title, body, author };
-    setIsPending(true);
-    fetch("http://localhost:8000/blogs", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(blog),
-    }).then(() => {
-      console.log("Blog added!");
+    e.preventDefault(); //Stop the default submit action
+    setIsPending(true); //Set the isPending state to true
+    let blog;
+    if (image)
+      blog = {
+        title,
+        body,
+        author,
+        image,
+      };
+    else blog = { title, body, author };
+    //POST request to JSON server
+    try {
+      axios.post("http://localhost:8000/blogs", blog);
       setIsPending(false);
-      //   history.go(-1); Go back
-      history.push("/");
-    });
+      //   history.go(-1); Go back to previous page
+      history.push("/"); //Go back to root or home page
+    } catch (err) {
+      console.log(err); //Set the isPending state to false
+      setIsPending(false);
+    }
   };
 
   return (
@@ -56,9 +77,13 @@ const Create = () => {
         >
           <option value="mario">Mario</option>
           <option value="yoshi">Yoshi</option>
+          <option value="paroo">Paroo</option>
         </select>
+        <label>Upload Image:</label>
+        <input type="file" name="" onChange={uploadPicture} />
+        {image && <img src={image} alt="Preview" />}
         {!isPending && <button>Add blog</button>}
-        {isPending && <button>Adding blog</button>}
+        {isPending && <button disabled>Adding blog</button>}
       </form>
     </div>
   );
