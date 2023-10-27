@@ -7,6 +7,7 @@ const Create = () => {
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("mario");
   const [image, setImage] = useState(null);
+
   const [isPending, setIsPending] = useState(false);
   const history = useHistory();
 
@@ -24,15 +25,22 @@ const Create = () => {
   const handleSubmit = (e) => {
     e.preventDefault(); //Stop the default submit action
     setIsPending(true); //Set the isPending state to true
+
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDay();
+
     let blog;
-    if (image)
-      blog = {
-        title,
-        body,
-        author,
-        image,
-      };
-    else blog = { title, body, author };
+    blog = {
+      title,
+      body,
+      author,
+      image,
+      date: `${month}/${day}/${year}`,
+    };
+    if (image) blog.image = image;
+
     //POST request to JSON server
     try {
       axios.post("http://localhost:8000/blogs", blog);

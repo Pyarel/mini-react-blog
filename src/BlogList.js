@@ -13,6 +13,7 @@ const BlogList = ({ blogs, title, handleDelete }) => {
           <Link to={`/blogs/${blog.id}`}>
             <h2>{blog.title}</h2>
             <p>Written By: {blog.author}</p>
+            <p>{blog.date}</p>
             <p className="blog-body">{blog.body}</p>
           </Link>
         </div>

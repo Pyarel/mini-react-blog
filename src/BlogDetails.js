@@ -29,6 +29,7 @@ const BlogDetails = () => {
       {blog && (
         <article>
           <h2>{blog.title}</h2>
+          <p>{blog.date}</p>
           {blog.image && (
             <img
               src={blog.image}
