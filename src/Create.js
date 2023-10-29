@@ -26,10 +26,13 @@ const Create = () => {
     e.preventDefault(); //Stop the default submit action
     setIsPending(true); //Set the isPending state to true
 
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDay();
+    const now = new Date();
+    const locale = navigator.language;
+    const options = {
+      day: "numeric",
+      month: "numeric",
+      year: "numeric",
+    };
 
     let blog;
     blog = {
@@ -37,7 +40,7 @@ const Create = () => {
       body,
       author,
       image,
-      date: `${month}/${day}/${year}`,
+      date: new Intl.DateTimeFormat("locale", options).format(now),
     };
     if (image) blog.image = image;
 
